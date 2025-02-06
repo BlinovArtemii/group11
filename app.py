@@ -12,10 +12,8 @@ url_russia = "https://raw.githubusercontent.com/codeforamerica/click_that_hood/m
 response_russia = requests.get(url_russia)
 russia_geojson = json.loads(response_russia.text)
 
-# Загрузка GeoJSON данных с точками
-# Замените URL на ваш реальный URL или путь к файлу
-with open("https://raw.githubusercontent.com/BlinovArtemii/group11/refs/heads/master/ai360_climateviz/gauge_stations.geojson", 'r', encoding='utf-8') as file:
-    points_geojson = json.load(file)
+response = requests.get("https://raw.githubusercontent.com/BlinovArtemii/group11/refs/heads/master/ai360_climateviz/gauge_stations.geojson")
+points_geojson = json.loads(response.text)
 
 # Инициализация приложения Dash
 app = dash.Dash(__name__)
@@ -53,7 +51,7 @@ def display_click_data(clickData):
             return show_plot(point_data['id'])
         else:
             return show_plot("19016")
-        
+
 # Запуск приложения
 if __name__ == '__main__':
     app.run_server(debug=True)
