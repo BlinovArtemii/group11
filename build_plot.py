@@ -6,9 +6,9 @@ import plotly.express as px
 import pandas as pd
 from dash.dependencies import Input, Output
 
-def show_plot(gauge_id, name):
-  data = pd.read_csv(f"project_1\lvl_obs\{gauge_id}.csv")
-  data_pred = pd.read_csv(f"project_1\pred\{gauge_id}.csv")
+def show_plot(gauge_id, name="placeholder"):
+  data = pd.read_csv(f"geopandas/ai360_climateviz/lvl_obs/{gauge_id}.csv")
+  data_pred = pd.read_csv(f"geopandas/ai360_climateviz/lvl_pred_csv/{gauge_id}.csv")
   data_pred['date'] = pd.to_datetime(data_pred['date'])
   data_pred['day_of_year'] = data_pred['date'].dt.dayofyear
   data_pred_1=data_pred.groupby(["day_of_year"])["lvl_sm_sim"].describe()["mean"]
